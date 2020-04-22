@@ -1,13 +1,19 @@
+# Created by Arthur Avagyan at 23.04.2020
+
+
 def printByte(byte: int):
     print('0x%02X' % byte)
 
+
 def printRow(row: [int]):
     print(''.join('0x%02X ' % i for i in row))
+
 
 def printBlock(block: [[int]]):
     for i, row in enumerate(block):
         if len(block) > 4 and i % 4 == 0: print('\nRound key ', i // 4)
         print(''.join('0x%02X ' % i for i in row))
+
 
 class AES:
     sBox = (
@@ -131,36 +137,18 @@ class AES:
     def generateKeyRows(keyBlock: [[int]]):  # AES 128
         for i in range(10):
             funcKey = AES.generateFuncKeyRow(keyBlock, i)
-            # printBlock(keyBlock)
-            # print('funcKey')
-            # printRow(funcKey)
-
 
             AES.xorArrays(funcKey, AES.rCon[i])
-            # printRow(funcKey)
-            # print()
+
             for j in range(4):
-                # printRow(keyBlock[4 * i + j])
-                # print(4 * i + j)
                 AES.xorArrays(funcKey, keyBlock[4 * i + j])
-                # print('fk')
-                # printRow(funcKey)
                 keyBlock.append(funcKey[:])
-                # print()
-            # print()
-            # print()
-            # print()
-
-
 
     @staticmethod
     def scheduleKeysFrom(keyBlock: [[int]]):
         for row in keyBlock:
             AES.scheduledKeys.append(row)
         AES.generateKeyRows(keyBlock)
-
-
-
 
 
 plainBlock = [[0x19, 0xa0, 0x9a, 0xe9],

@@ -53,7 +53,7 @@ class AES:
             [0x1b, 0x00, 0x00, 0x00],
             [0x36, 0x00, 0x00, 0x00]]
 
-    scheduledKeys: [[int]] = []  # each row is "column" as was presented in animation
+    scheduledKeys: [[int]] = []
 
     @staticmethod
     def subBytesRow(row: [int]):
@@ -178,7 +178,7 @@ aes.mixColumns(plainBlock)
 print('\nMix Columns')
 printBlock(plainBlock)
 
-print('\nKey Block // b0, b1, b2, b3')
+print('\nKey Block')
 printBlock(key)
 
 aes.scheduleKeysFrom(key)
